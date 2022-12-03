@@ -1,7 +1,9 @@
+from django.db.utils import IntegrityError
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from ..models import Group, Post
+
+from ..models import Group, Post, Follow
 
 User = get_user_model()
 
@@ -66,3 +68,26 @@ class PostModelTest(TestCase):
                     post._meta.get_field(field).help_text,
                     expected_value
                 )
+
+
+class FollowModelTests(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = User.objects.create(username='user')
+        cls.author = User.objects.create(username='author')
+
+    def test_unique_follow_model(self):
+        """
+        Posts: проверка уникальности подписок
+        """
+        Follow.objects.create(
+            user=self.user,
+            author=self.author
+        )
+
+        with self.assertRaises(IntegrityError):
+            Follow.objects.create(
+                user=self.user,
+                author=self.author
+            )

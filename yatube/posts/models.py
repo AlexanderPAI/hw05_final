@@ -116,3 +116,17 @@ class Follow(models.Model):
         related_name='following',
         verbose_name='Автор'
     )
+
+    # В posts/tests/test_models написал тест,
+    # который проверяет, что создание неуникальной
+    # модели Follow выдывает исключение IntegrityError.
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name='unique_follow'
+            )
+        ]
+
+    def __str__(self):
+        return f'Модель подписки f{self.user} -> f{self.author}'
