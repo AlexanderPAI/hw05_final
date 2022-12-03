@@ -158,8 +158,10 @@ def profile_unfollow(request, username):
     # Отписаться от автора
     author = get_object_or_404(User, username=username)
     user = request.user
-    Follow.objects.get(
+    follow = get_object_or_404(
+        Follow,
         user=user,
         author=author
-    ).delete()
+    )
+    follow.delete()
     return redirect('posts:profile', username=username)
