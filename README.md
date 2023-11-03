@@ -23,8 +23,9 @@
 
 ## Стек технологий:
 - Python 3.9.13
-- requests
-- sort-thumbnail
+- Django 2.2.16
+- requests 2.26.0
+- sort-thumbnail 12.7.0
 
 ## Запуск проекта
 
