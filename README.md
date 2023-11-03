@@ -1,3 +1,67 @@
-# hw05_final
+# Приложение "Блог"
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+Проект веб-блога с реализованными системами:
+- регистрации и авторизации пользователей;
+- публикации и редактирования постов с возможностью прикрепления изображений;
+- публикации и редактирования комментариев к постам;
+- система подписок на авторов постов.
+
+Проект является учебным и реализован с использованием SQLite, поэтому не подходит для деплоя на боевом сервере из коробки, так как SQLite не поддерживает более 1 одновременного соединения.
+
+## Стек технологий:
+- Python 3.9.13
+- requests
+- sort-thumbnail
+
+## Запуск проекта
+
+Осуществляется через командную строку PowerShell (Windows) или терминал (Linux).
+
+### 1. Клонировать репозиторий:
+
+```bash
+git clone git@github.com:AlexanderPAI/hw05_final.git
+```
+
+### 2. Установить и активировать виртуальное окружение:
+```bash
+python -m venv venv
+
+# PowerShell (Windows)
+.\venv\Script\activate
+
+# Linux (Ubuntu)
+source \venv\Script\activate
+```
+
+### 4. Обновить в виртуальном окружении менеджер пакетов pip:
+```bash
+(venv) python -m pip install --upgrade pip
+```
+
+### 5. Установить в виртуальное окружение необходимые зависимости:
+
+```bash
+(venv) pip install -r requirements.txt
+```
+
+### 6. Выполнить миграции для создания Django необходимых таблиц моделей:
+```bash
+# Перейти в каталог с файлом manage.py
+(venv) cd yatube
+
+# Создать миграции
+(venv) python manage.py makemigrations
+
+# Выполнить миграции
+(venv) python manage.py migrate
+```
+
+### 7. Запустить dev-сервер:
+```bash
+(venv) python manage.py runserver
+```
+
+Если запустить dev-сервер не удается:
+1. Убедитесь, что активировано виртуальное окружение
+2. Если возращается ошибка отсутствия таблиц, выполните в терминале команду `python manage.py migrate --run-syncdb`.

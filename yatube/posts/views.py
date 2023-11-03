@@ -99,7 +99,7 @@ def post_edit(request, post_id):
         instance=post
     )
     if is_author:
-        if request.method == 'POST':
+        if request.method == 'POST' or None:
             if form.is_valid():
                 form.save()
                 return redirect('posts:post_detail', post_id)
